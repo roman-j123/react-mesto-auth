@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'; 
+import { useEffect, useState } from 'react';
+import { Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 import '../index.css';
@@ -6,12 +7,22 @@ import Header from './Header.js';
 import Main from './Main.js';
 import Footer from './Footer.js';
 import ImagePopup from './ImagePopup';
+import Register from './Register';
+import Login from './Login';
+import PageNotFound from "./PageNotFound";
 import api from '../utils/api';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
+import ProtectedRoute from "./ProtectedRoute";
 
-function App() {
+export default function App() {
+  const initialData = {
+    email: '',
+    password: ''
+  }
+  const [data, setData] = useState(initialData);
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentUser, setCurrentUser] = useState({});
   const [cards, setCards] = useState([]);
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
@@ -19,6 +30,13 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [isOpen, setIsOpen] = useState(false)
+  const history = useHistory();
+
+  const handleLogin = () => {
+    this.setState({
+      loggedIn: true,
+    })
+  }
 
   useEffect(() => {
     api.getUser().then(response => {
@@ -81,8 +99,8 @@ function App() {
     })
   }
   function handleUpdateAvatar(item) {
-    api.updateAvatar(item).then(reponse => {
-      setCurrentUser(reponse)
+    api.updateAvatar(item).then(response => {
+      setCurrentUser(response)
       closeAllPopups();
     }).catch(error => {
       console.log(`Error: ${error}`)
@@ -101,17 +119,35 @@ function App() {
     <>
     <CurrentUserContext.Provider value={currentUser}>
       <Header />
-      <Main 
-        onEditProfile={handleEditProfileClick} 
-        onAddPlace={handleAddPlaceClick} 
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-        onCardLike={handleCardLike}
-        onCardDelete={handleDeleteCard}
-        cards={cards}
-      />
+      <Switch>
+        <Route exact path="/">
+          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+          <ProtectedRoute
+            path="/"
+            loggedIn={loggedIn}
+            component={Main}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleDeleteCard}
+            cards={cards}
+          />
+        </Route>
+        <Route path="/sign-in">
+          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+          <Login/>
+        </Route>
+        <Route path="/sign-up">
+          {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-up" />}
+          <Register/>
+        </Route>
+        <Route path="*">
+          <PageNotFound/>
+        </Route>
+      </Switch>
       <Footer />
-      
       <AddPlacePopup 
         isOpen={isAddPlacePopupOpen} 
         onClose={closeAllPopups}
@@ -136,4 +172,3 @@ function App() {
     </>
   );
 }
-export default App;
