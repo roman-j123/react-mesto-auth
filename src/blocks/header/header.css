@@ -1,9 +1,4 @@
 .header {
-  margin: 45px 0 40px 0;
+  margin: 0 0 60px 0;
   border-bottom: 1px solid rgba(84, 84, 84, .7);
-}
-@media (max-width: 768px) {
-  .header {
-    margin: 28px 9px 31px 0;
-  }
 }
