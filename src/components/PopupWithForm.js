@@ -1,5 +1,3 @@
-import InfoTooltip from "./InfoToolTip";
-
 function PopupWithForm(props) {
 
     return (

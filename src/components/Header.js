@@ -11,6 +11,14 @@ function Header({loggedIn, loggedOut, email}) {
         className="header__logo" 
         alt="Логотип сайта" 
       />
+        { loggedIn &&
+          <button
+            className="header__burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        }
       <ul className="header__login">
         <Switch>
           <Route path="/sign-in">

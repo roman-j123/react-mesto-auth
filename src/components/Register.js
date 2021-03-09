@@ -1,7 +1,7 @@
 //test@test.fix
 //12345
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export default function Register( { onRegister }) {
   const initialData = {
     password: '',

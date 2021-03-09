@@ -139,7 +139,7 @@ export default function App() {
         }
       }).catch((error)=>{
         if(error) {
-          setInfoTooltip({message: `${error}`, icon: `${cross}`, isOpen: true})
+          setInfoTooltip({message: 'Что-то пошло не так! Попробуйте ещё раз.', icon: `${cross}`, isOpen: true})
         }
 
       })

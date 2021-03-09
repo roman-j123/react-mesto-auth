@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 export default function Login({ onLogin }) {
   const initialData = {
     email: '',
     password: ''
   }
   const [data, setData] = useState(initialData);
-  const history = useHistory();
   const handleChange = (event) => {
     const { name, value } = event.target;
     setData(data => ({

@@ -4,6 +4,7 @@
 
 @import url("./blocks/header/header.css");
 @import url("./blocks/header/__container/header__container.css");
+@import url("./blocks/header/__burger/header__burger.css");
 @import url("./blocks/header/__login/header__login.css");
 @import url("./blocks/header/__login-item/header__login-item.css");
 @import url("./blocks/header/__login-item/_type/header__login-item_type_email.css");
