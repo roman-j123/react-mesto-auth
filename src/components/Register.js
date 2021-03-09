@@ -26,13 +26,7 @@ export default function Register( { onRegister }) {
       return;
     }
     onRegister(data)
-      .then(resetForm)
-      .then(() => {
-        history.push('/sign-in');
-      })
-      .catch(err => {
-        console.log(`Error: ${err}`)
-      })
+      .then(resetForm);
   }
 
   return (
