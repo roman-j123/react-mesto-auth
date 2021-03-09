@@ -9,7 +9,6 @@ export default function Register( { onRegister }) {
   }
 
   const [data, setData] = useState(initialData);
-  const history = useHistory();
   const handleChange = (event) => {
     const { name, value } = event.target;
     setData(data => ({
