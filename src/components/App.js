@@ -1,6 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Route, Switch, useHistory } from 'react-router-dom';
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
+import cross from '../images/cross.svg';
+import check from '../images/check.svg';
 
 import '../index.css';
 import Header from './Header.js';
@@ -137,7 +139,7 @@ export default function App() {
         }
       }).catch((error)=>{
         if(error) {
-          setInfoTooltip({message: `${error}`, icon: 'cross', isOpen: true})
+          setInfoTooltip({message: `${error}`, icon: `${cross}`, isOpen: true})
         }
 
       })
@@ -153,15 +155,11 @@ export default function App() {
     return auth.register(data)
       .then(response => {
         if(response.data) {
-          setInfoTooltip({message: 'Вы успешно зарегистрировались!', icon: 'check', isOpen: true})
+          setInfoTooltip({message: 'Вы успешно зарегистрировались!', icon: `${check}`, isOpen: true})
         }
       }).catch(error => {
-      if (error.status === 400 || error.statusCode === 401) {
-        setInfoTooltip({ message: 'Некорректно заполнено одно из полей', icon: 'cross', isOpen: true })
-      } else if (error.status === 409) {
-        setInfoTooltip({ message: 'Вы уже зарегистрированы', icon: 'cross', isOpen: true })
-      } else {
-        setInfoTooltip({ message: 'Что-то пошло не так! Попробуйте ещё раз', icon: 'cross', isOpen: true })
+      if (error) {
+        setInfoTooltip({ message: `${error}`, icon: `${cross}`, isOpen: true })
       }
     })
   }
@@ -216,6 +214,7 @@ export default function App() {
         onClose={closeAllPopups}
       />
       <InfoTooltip
+        name="info"
         message={infoTooltip.message}
         icon={infoTooltip.icon}
         isOpen={infoTooltip.isOpen}

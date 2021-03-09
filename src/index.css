@@ -59,5 +59,6 @@
 @import url("./blocks/popup/__input/_type_invaild/popup__input_type_invaild.css");
 @import url("./blocks/popup/__input-error/popup__input-error.css");
 @import url("./blocks/popup/__info-text/popup__info-text.css");
+@import url("./blocks/popup/__info-icon/popup__info-icon.css");
 @import url("./blocks/popup/__button/popup__button.css");
 @import url("./blocks/popup/__close/popup__close.css");
