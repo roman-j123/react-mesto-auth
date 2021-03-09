@@ -10,7 +10,7 @@ function PopupWithForm(props) {
           <fieldset className="popup__fieldset">
             <legend className="popup__header">{props.title}</legend>
             {props.children}
-            {InfoTooltip ? <button className="popup__button" type="submit">{props.buttonText}</button> : ''}
+            <button className="popup__button" type="submit">{props.buttonText}</button>
           </fieldset>
         </form>
       </div>
